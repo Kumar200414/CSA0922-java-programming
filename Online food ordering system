@@ -1,0 +1,109 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+// User class to represent users
+class User {
+    private String username;
+    private String password;
+    // Other user details
+    
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+    
+    // Getters and setters
+}
+
+// MenuItem class to represent menu items
+class MenuItem {
+    private String name;
+    private double price;
+    
+    public MenuItem(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
+    
+    // Getters and setters
+}
+
+// Order class to represent orders
+class Order {
+    private User user;
+    private List<MenuItem> items;
+    
+    public Order(User user) {
+        this.user = user;
+        this.items = new ArrayList<>();
+    }
+    
+    public void addItem(MenuItem item) {
+        items.add(item);
+    }
+    
+    // Other order methods
+}
+
+public class FoodOrderingSystem {
+    private static List<MenuItem> menu;
+    private static List<Order> orders;
+    private static Scanner scanner;
+
+    public static void main(String[] args) {
+        initialize();
+        login();
+        browseMenu();
+        placeOrder();
+        // Other functionalities
+    }
+
+    private static void initialize() {
+        // Initialize menu
+        menu = new ArrayList<>();
+        menu.add(new MenuItem("Burger", 5.99));
+        menu.add(new MenuItem("Pizza", 8.99));
+        menu.add(new MenuItem("Pasta", 7.49));
+        menu.add(new MenuItem("Sandwich", 6.99));
+        
+        // Initialize orders
+        orders = new ArrayList<>();
+        
+        // Initialize scanner
+        scanner = new Scanner(System.in);
+    }
+
+    private static void login() {
+        // Implement user login logic
+    }
+
+    private static void browseMenu() {
+        System.out.println("Menu:");
+        for (int i = 0; i < menu.size(); i++) {
+            System.out.println((i + 1) + ". " + menu.get(i).getName() + " - $" + menu.get(i).getPrice());
+        }
+    }
+
+    private static void placeOrder() {
+        System.out.println("Enter the number of the item you want to order:");
+        int choice = scanner.nextInt();
+        
+        // Validate choice
+        
+        MenuItem selectedItem = menu.get(choice - 1);
+        System.out.println("Enter quantity:");
+        int quantity = scanner.nextInt();
+        
+        // Create order
+        Order order = new Order(null); // Pass user object here
+        for (int i = 0; i < quantity; i++) {
+            order.addItem(selectedItem);
+        }
+        
+        // Add order to orders list
+        orders.add(order);
+        
+        System.out.println("Order placed successfully!");
+    }
+}
